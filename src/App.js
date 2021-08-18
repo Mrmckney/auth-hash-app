@@ -6,24 +6,24 @@ import ProtectedForm from './components/ProtectedForm'
 
 function App() {
 
-  const [user, setUser] = useState()
+  const [token, setToken] = useState()
   const [returningUser, setReturningUser] = useState(false)
 
-  if(!user) {
+  if(!token) {
     return (
       <>
         {!returningUser 
         ?
-          <Signup setUser={setUser} setReturningUser={setReturningUser} />
+          <Signup setToken={setToken} setReturningUser={setReturningUser} />
         :
-          <Login setUser={setUser} setReturningUser={setReturningUser} />
+          <Login setToken={setToken} setReturningUser={setReturningUser} />
         }
       </>
     )
   }
   return (
     <>
-     <ProtectedForm />
+     <ProtectedForm token={token}/>
     </>
   )
 }

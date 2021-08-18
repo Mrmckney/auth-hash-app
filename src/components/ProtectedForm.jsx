@@ -20,9 +20,19 @@ const validateMessages = {
     },
 }
 
-function ProtectedForm() {
+function ProtectedForm({token}) {
     const onFinish = values => {
-        console.log(values)
+        fetch('https://auth-hash-api-mm.web.app/profile', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer: ${token}`
+            },
+            body: JSON.stringify(values.user)
+        })
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(err => alert(err))
     }
     return(
         <>  

@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'antd'
 
 const mySalt = "$2b$10$ibXdpDiUvdVne89h2QdtKe"
 
-function Login({setUser, setReturningUser}) {
+function Login({setToken, setReturningUser}) {
 
   function handleLogin({email, password}) {
     const hashedPassword = bcrypt.hashSync(password, mySalt)
@@ -15,9 +15,7 @@ function Login({setUser, setReturningUser}) {
       body: JSON.stringify({ email, password: hashedPassword })
     })
       .then(response => response.json())
-      .then(data => {
-          setUser(data.user || { email })
-      })
+      .then(data => setToken(data.token))
       .catch(err => alert(err))
   }
 
